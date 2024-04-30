@@ -47,6 +47,6 @@ public class BudgetEntity {
     @Column(name = "generated_date", nullable = false)
     private Timestamp generatedDate;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<CategoryEntity> categories = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "transactionId", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<TransactionEntity> categories = new ArrayList<>();
 }
