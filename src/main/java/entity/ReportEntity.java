@@ -26,6 +26,6 @@ public class ReportEntity {
     @Column(name = "report_type", nullable = false)
     private String reportType;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<UserEntity> categories = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "budgetId", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<BudgetEntity> categories = new ArrayList<>();
 }
