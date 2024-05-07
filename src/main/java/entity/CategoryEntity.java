@@ -29,4 +29,8 @@ public class CategoryEntity {
 
     @Column(name = "description", nullable = false)
     private String description;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<TransactionEntity> transactions = new ArrayList<>();
+
 }
