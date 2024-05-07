@@ -22,13 +22,22 @@ public class UserEntity {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     List<CategoryEntity> categories = new ArrayList<>();
 
-    @Column(name = "username", nullable = false, unique = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<BudgetEntity> budgets = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<TransactionEntity> transactions = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<ReportEntity> reports = new ArrayList<>();
+
+    @Column(name = "username", nullable = false)
     private String userName;
 
-    @Column(name = "password", nullable = false, updatable = true)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email", nullable = false, unique = true, updatable = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "created_at", nullable = false)
