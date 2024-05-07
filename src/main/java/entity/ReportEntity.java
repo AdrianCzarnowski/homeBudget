@@ -14,7 +14,7 @@ public class ReportEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name ="reports", nullable = false)
+    @Column(name ="report_id", nullable = false)
     private UUID reportId;
 
     @ManyToOne(fetch = FetchType.EAGER)
