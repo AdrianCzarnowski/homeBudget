@@ -7,8 +7,6 @@ import lombok.Data;
 import java.sql.Timestamp;
 import java.time.Month;
 import java.time.Year;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -21,11 +19,11 @@ public class BudgetEntity {
     private UUID budgetId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     private CategoryEntity category;
 
     @Column(name = "amount", columnDefinition = "FLOAT")
@@ -46,7 +44,4 @@ public class BudgetEntity {
 
     @Column(name = "generated_date", nullable = false)
     private Timestamp generatedDate;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "transactionId", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<TransactionEntity> categories = new ArrayList<>();
 }
