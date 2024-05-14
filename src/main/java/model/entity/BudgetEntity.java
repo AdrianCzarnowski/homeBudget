@@ -1,4 +1,4 @@
-package entity;
+package model.entity;
 
 import constants.ApplicationConstants;
 import jakarta.persistence.*;

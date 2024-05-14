@@ -1,6 +1,6 @@
 package repository;
 
-import entity.BudgetEntity;
+import model.entity.BudgetEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

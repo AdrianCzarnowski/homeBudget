@@ -1,6 +1,6 @@
 package repository;
 
-import entity.CategoryEntity;
+import model.entity.CategoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
