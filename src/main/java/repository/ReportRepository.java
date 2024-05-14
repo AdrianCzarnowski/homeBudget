@@ -1,6 +1,6 @@
 package repository;
 
-import entity.ReportEntity;
+import model.entity.ReportEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
