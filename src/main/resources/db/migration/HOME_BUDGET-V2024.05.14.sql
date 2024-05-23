@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE homebudget.users (
   user_id UUID PRIMARY KEY,
   username VARCHAR (50) UNIQUE NOT NULL,
   password VARCHAR (50) NOT NULL,
@@ -6,7 +6,7 @@ CREATE TABLE users (
   created_at TIMESTAMP NOT NULL,
   last_login TIMESTAMP
 );
-CREATE TABLE categories (
+CREATE TABLE homebudget.categories (
   category_id UUID PRIMARY KEY,
   user_id UUID,
   name VARCHAR (50) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE categories (
     FOREIGN KEY(user_id)
         REFERENCES users(user_id)
 );
-CREATE TABLE transactions (
+CREATE TABLE homebudget.transactions (
   transaction_id UUID PRIMARY KEY,
   user_id UUID,
   category_id UUID,
@@ -31,13 +31,13 @@ CREATE TABLE transactions (
     FOREIGN KEY(category_id)
         REFERENCES categories(category_id)
 );
-CREATE TABLE budgets (
+CREATE TABLE homebudget.budgets (
   budget_id UUID PRIMARY KEY,
   user_id UUID,
   category_id UUID,
   amount FLOAT,
-  month_dt DATE NOT NULL,
-  year_dt DATE NOT NULL,
+  month_dt INTEGER NOT NULL,
+  year_dt INTEGER NOT NULL,
   CONSTRAINT f_user_id
     FOREIGN KEY(user_id)
         REFERENCES users(user_id),
@@ -45,7 +45,7 @@ CREATE TABLE budgets (
     FOREIGN KEY(category_id)
         REFERENCES categories(category_id)
 );
-CREATE TABLE reports (
+CREATE TABLE homebudget.reports (
   report_id UUID PRIMARY KEY,
   user_id UUID,
   report_type VARCHAR(50) NOT NULL,

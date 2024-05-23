@@ -1,4 +1,4 @@
-package constants;
+package projects.adrian.homebudget.constants;
 
 import lombok.experimental.UtilityClass;
 

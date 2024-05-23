@@ -1,6 +1,6 @@
-package model.entity;
+package projects.adrian.homebudget.model.entity;
 
-import constants.ApplicationConstants;
+import projects.adrian.homebudget.constants.ApplicationConstants;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -30,11 +30,10 @@ public class BudgetEntity {
     private Float amount;
 
     @Column(name = "month_dt", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Month monthDt;
+    private Integer monthDt;
 
     @Column(name = "year_dt", nullable = false)
-    private Year yearDt;
+    private Integer yearDt;
 
     @Column(name = "start_time", nullable = false)
     private Timestamp startTime;

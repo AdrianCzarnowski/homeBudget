@@ -1,6 +1,6 @@
-package model.entity;
+package projects.adrian.homebudget.model.entity;
 
-import constants.ApplicationConstants;
+import projects.adrian.homebudget.constants.ApplicationConstants;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,11 +17,11 @@ public class TransactionEntity {
     private UUID transactionId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     private CategoryEntity category;
 
     @Column(name = "amount", columnDefinition = "FLOAT")

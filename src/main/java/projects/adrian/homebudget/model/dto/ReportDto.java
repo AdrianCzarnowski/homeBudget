@@ -1,4 +1,4 @@
-package model.dto;
+package projects.adrian.homebudget.model.dto;
 
 import java.util.UUID;
 

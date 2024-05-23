@@ -1,6 +1,6 @@
-package repository;
+package projects.adrian.homebudget.repository;
 
-import model.entity.ReportEntity;
+import projects.adrian.homebudget.model.entity.ReportEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
-package model.entity;
+package projects.adrian.homebudget.model.entity;
 
 
-import constants.ApplicationConstants;
+import projects.adrian.homebudget.constants.ApplicationConstants;
 import jakarta.persistence.*;
 import lombok.Data;
 

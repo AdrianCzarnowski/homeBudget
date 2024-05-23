@@ -1,8 +1,8 @@
-package mapper;
+package projects.adrian.homebudget.mapper;
 
-import constants.ApplicationConstants;
-import model.dto.TransactionDto;
-import model.entity.TransactionEntity;
+import projects.adrian.homebudget.constants.ApplicationConstants;
+import projects.adrian.homebudget.model.dto.TransactionDto;
+import projects.adrian.homebudget.model.entity.TransactionEntity;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;

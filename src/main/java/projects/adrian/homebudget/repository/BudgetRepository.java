@@ -1,6 +1,6 @@
-package repository;
+package projects.adrian.homebudget.repository;
 
-import model.entity.BudgetEntity;
+import projects.adrian.homebudget.model.entity.BudgetEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface BudgetRepository extends JpaRepository<BudgetEntity, UUID> {
-    List<BudgetEntity> findByUserName(String name);
+    List<BudgetEntity> findByUserUserName(String name);
 }
