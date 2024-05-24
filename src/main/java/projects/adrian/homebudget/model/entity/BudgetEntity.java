@@ -35,12 +35,5 @@ public class BudgetEntity {
     @Column(name = "year_dt", nullable = false)
     private Integer yearDt;
 
-    @Column(name = "start_time", nullable = false)
-    private Timestamp startTime;
 
-    @Column(name = "end_time", nullable = false)
-    private Timestamp endTime;
-
-    @Column(name = "generated_date", nullable = false)
-    private Timestamp generatedDate;
 }

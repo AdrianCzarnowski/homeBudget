@@ -15,14 +15,14 @@ public abstract class UserMapper {
 
     @Mapping(target = "name", source = "userName")
     @Mapping(target = "password", ignore = true)
-    @Mapping(target = "email", qualifiedByName = "addSuffixToEmail")
+//    @Mapping(target = "email", qualifiedByName = "addSuffixToEmail")
     public abstract  UserDto toDto(UserEntity userEntity);
 
     @Mapping(target = "userName", source = "name")
     abstract UserEntity toEntity(UserDto userDto);
 
-    @Named("addSuffixToEmail")
-     String addSuffixToEmail(String email) {
-        return email + "_test";
-    }
+//    @Named("addSuffixToEmail")
+//     String addSuffixToEmail(String email) {
+//        return email + "_test";
+//    }
 }
