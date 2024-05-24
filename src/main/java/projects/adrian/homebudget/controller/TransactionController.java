@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import projects.adrian.homebudget.constants.ApplicationConstants;
 import projects.adrian.homebudget.model.dto.TransactionDto;
 import projects.adrian.homebudget.model.entity.TransactionEntity;
 import projects.adrian.homebudget.service.TransactionService;
@@ -15,10 +16,8 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(TransactionController.API_URL)
+@RequestMapping(ApplicationConstants.TRANSACTION_API_URL)
 public class TransactionController {
-
-    public static final String API_URL = "/api/transaction";
 
     private final TransactionService transactionService;
 

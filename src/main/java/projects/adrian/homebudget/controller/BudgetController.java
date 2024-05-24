@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import projects.adrian.homebudget.constants.ApplicationConstants;
 import projects.adrian.homebudget.model.dto.BudgetDto;
 import projects.adrian.homebudget.service.BudgetService;
 
@@ -13,10 +14,8 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(BudgetController.API_URL)
+@RequestMapping(ApplicationConstants.BUDGET_API_URL)
 public class BudgetController {
-
-    public static final String API_URL = "/api/budget";
 
     private final BudgetService budgetService;
 

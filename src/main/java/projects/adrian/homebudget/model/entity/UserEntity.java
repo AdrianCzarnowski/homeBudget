@@ -1,5 +1,6 @@
 package projects.adrian.homebudget.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import projects.adrian.homebudget.constants.ApplicationConstants;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -20,7 +21,9 @@ public class UserEntity {
     private UUID userId;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonManagedReference
     List<CategoryEntity> categories = new ArrayList<>();
+
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     List<BudgetEntity> budgets = new ArrayList<>();

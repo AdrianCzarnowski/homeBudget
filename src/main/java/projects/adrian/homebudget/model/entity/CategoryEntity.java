@@ -1,6 +1,8 @@
 package projects.adrian.homebudget.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import projects.adrian.homebudget.constants.ApplicationConstants;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -18,8 +20,14 @@ public class CategoryEntity {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
+//    @JsonBackReference
     @JoinColumn(name = "user_id")
 //    @JoinTable(name = "homebudget.user_category", joinColumns = {@JoinColumn(name = "userentity_userId")}, inverseJoinColumns = {@JoinColumn(name = "categoryentity_categoryid")})
+//    @JoinTable(
+//            name = "homebudget.category_apps",
+//            joinColumns = {@JoinColumn(name = "user_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "category_id")}
+//    )
     private UserEntity user;
 
     @Column(name = "name", nullable = false)
