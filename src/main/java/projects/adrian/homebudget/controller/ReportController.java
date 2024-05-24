@@ -6,29 +6,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import projects.adrian.homebudget.model.dto.TransactionDto;
+import projects.adrian.homebudget.model.dto.ReportDto;
+import projects.adrian.homebudget.model.entity.ReportEntity;
 import projects.adrian.homebudget.model.entity.TransactionEntity;
-import projects.adrian.homebudget.service.TransactionService;
+import projects.adrian.homebudget.service.ReportService;
 
 import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(TransactionController.API_URL)
-public class TransactionController {
+@RequestMapping(ReportController.API_URL)
+public class ReportController {
 
-    public static final String API_URL = "/api/transaction";
+    public static final String API_URL = "/api/report";
 
-    private final TransactionService transactionService;
+    private final ReportService reportService;
 
     @GetMapping
-    public List<TransactionEntity> getAllTransactions() {
-        return transactionService.getAllTransactions();
+    public List<ReportEntity> getAllReports() {
+        return reportService.getAllReports();
     }
 
     @GetMapping(value = "/{uuid}")
-    public ResponseEntity<TransactionDto> getById(@PathVariable UUID uuid) {
-        return ResponseEntity.ok(transactionService.getTransactionById(uuid));
+    public ResponseEntity<ReportDto> getById(@PathVariable UUID uuid) {
+        return ResponseEntity.ok(reportService.findById(uuid));
     }
 }
