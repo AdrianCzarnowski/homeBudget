@@ -21,7 +21,6 @@ public class UserEntity {
     private UUID userId;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonManagedReference
     List<CategoryEntity> categories = new ArrayList<>();
 
 

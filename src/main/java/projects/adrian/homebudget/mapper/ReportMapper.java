@@ -1,5 +1,6 @@
 package projects.adrian.homebudget.mapper;
 
+import org.mapstruct.Mapping;
 import projects.adrian.homebudget.constants.ApplicationConstants;
 import projects.adrian.homebudget.model.entity.ReportEntity;
 import projects.adrian.homebudget.model.dto.ReportDto;
@@ -17,6 +18,7 @@ public interface ReportMapper {
     @IterableMapping(qualifiedByName = "toEntity")
     List<ReportEntity> toListEntity(List<ReportDto> reportDtos);
 
+    @Mapping(source = "user.userId", target = "userId")
     @Named("toDto")
     ReportDto toDto(ReportEntity reportEntity);
 

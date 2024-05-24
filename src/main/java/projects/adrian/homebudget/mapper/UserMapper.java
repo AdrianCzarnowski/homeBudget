@@ -9,7 +9,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-@Mapper(componentModel = ApplicationConstants.COMPONENT_MODEL_SPRING)
+@Mapper(componentModel = ApplicationConstants.COMPONENT_MODEL_SPRING,uses = {CategoryMapper.class,TransactionMapper.class, ReportMapper.class, BudgetMapper.class})
 
 public abstract class UserMapper {
 

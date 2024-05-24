@@ -20,8 +20,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<UserEntity> getAllUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        return  ResponseEntity.ok(userService.getAllUsers());
     }
 
     @GetMapping(value = "/{uuid}")

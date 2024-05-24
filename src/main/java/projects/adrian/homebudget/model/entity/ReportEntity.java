@@ -15,16 +15,15 @@ public class ReportEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name ="report_id", nullable = false)
+    @Column(name = "report_id", nullable = false)
     private UUID reportId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
     @Column(name = "report_type", nullable = false)
     private String reportType;
-
 
     @Column(name = "start_time", nullable = false)
     private Timestamp startTime;
