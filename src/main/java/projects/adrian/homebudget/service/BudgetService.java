@@ -17,12 +17,23 @@ public class BudgetService {
     private final BudgetRepository budgetRepository;
     private final BudgetMapper budgetMapper;
 
-    public List<BudgetEntity> getAllBudgets() {
-        return budgetRepository.findAll();
+    public List<BudgetDto> getAllBudgets() {
+        return budgetRepository.findAll().stream().map(budgetMapper::toDto).toList();
     }
-    public BudgetDto findById(UUID uuid) {
+
+    public BudgetDto findByBudgetId(UUID uuid) {
         Optional<BudgetEntity> optionalBudgetEntity = budgetRepository.findById(uuid);
         return optionalBudgetEntity.map(budgetMapper::toDto)
-                .orElseThrow(() -> new RuntimeException("Can not find user by given id " + uuid));
+                .orElseThrow(() -> new RuntimeException("Can not find budget by given id " + uuid));
+    }
+
+    public BudgetDto saveBudget(BudgetDto budgetDto) {
+        BudgetEntity budgetEntity = budgetMapper.toEntity(budgetDto);
+        BudgetEntity savedEntity = budgetRepository.save(budgetEntity);
+        return budgetMapper.toDto(savedEntity);
+    }
+
+    public void deleteBudget(UUID uuid) {
+        budgetRepository.deleteById(uuid);
     }
 }

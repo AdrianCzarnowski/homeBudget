@@ -19,14 +19,24 @@ public class TransactionService {
 
     private final TransactionMapper transactionMapper;
 
-    public List<TransactionEntity> getAllTransactions() {
-        return transactionRepository.findAll();
+    public List<TransactionDto> getAllTransactions() {
+        return transactionRepository.findAll().stream().map(transactionMapper::toDto).toList();
     }
 
     public TransactionDto getTransactionById(UUID uuid) {
         Optional<TransactionEntity> optionalTransactionEntity = transactionRepository.findById(uuid);
         return optionalTransactionEntity.map(transactionMapper::toDto)
-                .orElseThrow(() -> new RuntimeException("Can not find user by given id " + uuid));
+                .orElseThrow(() -> new RuntimeException("Can not find transaction by given id " + uuid));
+    }
+
+    public TransactionDto saveTransaction(TransactionDto transactionDto) {
+        TransactionEntity transactionEntity = transactionMapper.toEntity(transactionDto);
+        TransactionEntity savedEntity = transactionRepository.save(transactionEntity);
+        return transactionMapper.toDto(savedEntity);
+    }
+
+    public void deleteTransaction(UUID uuid) {
+        transactionRepository.deleteById(uuid);
     }
 }
 

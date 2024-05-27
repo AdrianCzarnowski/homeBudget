@@ -29,7 +29,14 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("Can not find user by given id " + uuid));
     }
 
-    public UserEntity createUser(UserEntity userEntity){
-        return userRepository.save(userEntity);
+    public UserDto saveUser(UserDto userDto) {
+        UserEntity userEntity = userMapper.toEntity(userDto);
+        UserEntity savedEntity = userRepository.save(userEntity);
+        return userMapper.toDto(savedEntity);
+    }
+
+    //TODO - validation delete methods
+    public void deleteUser(UUID userId) {
+        userRepository.deleteById(userId);
     }
 }

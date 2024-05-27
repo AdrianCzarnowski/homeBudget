@@ -1,12 +1,11 @@
 package projects.adrian.homebudget.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import projects.adrian.homebudget.constants.ApplicationConstants;
 import projects.adrian.homebudget.model.dto.UserDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import projects.adrian.homebudget.model.entity.ReportEntity;
-import projects.adrian.homebudget.model.entity.UserEntity;
 import projects.adrian.homebudget.service.UserService;
 
 import java.util.List;
@@ -20,18 +19,29 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserDto>> getAllUsers() {
-        return  ResponseEntity.ok(userService.getAllUsers());
+    public ResponseEntity<List<UserDto>> getAllUsers(@RequestBody UserDto userDto) {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @GetMapping(value = "/{uuid}")
-    public ResponseEntity<UserDto> getById(@PathVariable UUID uuid){
+    public ResponseEntity<UserDto> getById(@PathVariable UUID uuid) {
         return ResponseEntity.ok(userService.findById(uuid));
     }
 
     @PostMapping
-    public UserEntity createUser(@RequestBody UserEntity userEntity){
-        return userService.createUser(userEntity);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(userService.saveUser(userDto), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/{uuid}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable UUID uuid, @RequestBody UserDto userDto) {
+        return new ResponseEntity<>(userService.saveUser(userDto), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/{uuid}")
+    public ResponseEntity<UserDto> deleteUser(@PathVariable UUID uuid) {
+        userService.deleteUser(uuid);
+        return ResponseEntity.noContent().build();
     }
 }
 

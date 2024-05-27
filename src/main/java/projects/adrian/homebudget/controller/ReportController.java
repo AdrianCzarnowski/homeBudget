@@ -1,15 +1,11 @@
 package projects.adrian.homebudget.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import projects.adrian.homebudget.constants.ApplicationConstants;
 import projects.adrian.homebudget.model.dto.ReportDto;
-import projects.adrian.homebudget.model.entity.ReportEntity;
-import projects.adrian.homebudget.model.entity.TransactionEntity;
 import projects.adrian.homebudget.service.ReportService;
 
 import java.util.List;
@@ -23,12 +19,29 @@ public class ReportController {
     private final ReportService reportService;
 
     @GetMapping
-    public List<ReportEntity> getAllReports() {
-        return reportService.getAllReports();
+    public ResponseEntity<List<ReportDto>> getAllReports(@RequestBody ReportDto reportDto) {
+        return ResponseEntity.ok(reportService.getAllReports());
     }
 
     @GetMapping(value = "/{uuid}")
     public ResponseEntity<ReportDto> getById(@PathVariable UUID uuid) {
         return ResponseEntity.ok(reportService.findById(uuid));
+    }
+
+
+    @PostMapping
+    public ResponseEntity<ReportDto> createReport(@RequestBody ReportDto reportDto) {
+        return new ResponseEntity<>(reportService.saveReport(reportDto), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/{uuid}")
+    public ResponseEntity<ReportDto> updateReport(@PathVariable UUID uuid, @RequestBody ReportDto reportDto) {
+        return new ResponseEntity<>(reportService.saveReport(reportDto), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/{uuid}")
+    public ResponseEntity<ReportDto> deleteReport(@PathVariable UUID uuid) {
+        reportService.deleteReport(uuid);
+        return ResponseEntity.noContent().build();
     }
 }

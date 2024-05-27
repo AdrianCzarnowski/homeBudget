@@ -19,13 +19,24 @@ public class ReportService {
     private final ReportRepository reportRepository;
     private final ReportMapper reportMapper;
 
-    public List<ReportEntity> getAllReports() {
-        return reportRepository.findAll();
+    public List<ReportDto> getAllReports() {
+        return reportRepository.findAll().stream().map(reportMapper::toDto).toList();
     }
 
     public ReportDto findById(UUID uuid) {
         Optional<ReportEntity> optionalReportEntity = reportRepository.findById(uuid);
         return optionalReportEntity.map(reportMapper::toDto)
-                .orElseThrow(() -> new RuntimeException("Can not find user by given id " + uuid));
+                .orElseThrow(() -> new RuntimeException("Can not find report by given id " + uuid));
     }
+
+    public ReportDto saveReport(ReportDto reportDto) {
+        ReportEntity reportEntity = reportMapper.toEntity(reportDto);
+        ReportEntity savedEntity = reportRepository.save(reportEntity);
+        return reportMapper.toDto(savedEntity);
+    }
+
+    public void deleteReport(UUID uuid) {
+        reportRepository.deleteById(uuid);
+    }
+
 }
