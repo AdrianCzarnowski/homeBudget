@@ -1,6 +1,7 @@
 package projects.adrian.homebudget.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import projects.adrian.homebudget.mapper.CategoryMapper;
 import projects.adrian.homebudget.model.dto.BudgetDto;

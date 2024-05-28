@@ -19,6 +19,7 @@ public interface TransactionMapper {
     List<TransactionEntity> toListEntity(List<TransactionDto> transactionDtos);
 
     @Mapping(source = "user.userId", target = "userId")
+    @Mapping(source = "category.categoryId", target = "categoryId")
     @Named("toDto")
     TransactionDto toDto(TransactionEntity transactionEntity);
 
