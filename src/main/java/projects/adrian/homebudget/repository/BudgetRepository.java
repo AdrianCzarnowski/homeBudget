@@ -9,5 +9,4 @@ import java.util.UUID;
 
 @Repository
 public interface BudgetRepository extends JpaRepository<BudgetEntity, UUID> {
-//    List<BudgetEntity> findByUser(String name);
 }
