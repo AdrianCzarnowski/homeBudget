@@ -36,4 +36,10 @@ public class BudgetService {
     public void deleteBudget(UUID uuid) {
         budgetRepository.deleteById(uuid);
     }
+
+    public BudgetDto findByCategoryId(UUID categoryId){
+        Optional<BudgetEntity> optionalBudgetEntity = budgetRepository.findByCategoryCategoryId(categoryId);
+        return optionalBudgetEntity.map(budgetMapper::toDto)
+                .orElseThrow(() -> new RuntimeException("Can not find budget by given category id " + categoryId));
+    }
 }
