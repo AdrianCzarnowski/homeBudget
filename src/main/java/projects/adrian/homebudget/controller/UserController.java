@@ -19,11 +19,11 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserDto>> getAllUsers(@RequestBody UserDto userDto) {
+    public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @GetMapping(value = "/{uuid}")
+    @GetMapping(value = "/get-by-id/{uuid}")
     public ResponseEntity<UserDto> getById(@PathVariable UUID uuid) {
         return ResponseEntity.ok(userService.findById(uuid));
     }
