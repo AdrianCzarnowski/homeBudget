@@ -16,16 +16,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.result.StatusResultMatchers;
 import projects.adrian.homebudget.configuration.TestMockConfiguration;
 import projects.adrian.homebudget.constants.ApplicationConstants;
 import projects.adrian.homebudget.data.UserTestData;
 import projects.adrian.homebudget.helper.MockMvcHelper;
 import projects.adrian.homebudget.model.dto.UserDto;
-import projects.adrian.homebudget.model.entity.UserEntity;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
