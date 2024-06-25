@@ -35,7 +35,10 @@ public class CategoryService {
         return categoryMapper.toDto(savedEntity);
     }
 
-    public void deleteCategory(UUID userId) {
-        categoryRepository.deleteById(userId);
+    public void deleteCategory(UUID categoryId) {
+        categoryRepository.deleteById(categoryId);
+        if (!categoryRepository.existsById(categoryId)) {
+            throw new RuntimeException("Transaction with ID " + categoryId + " does not exist");
+        }
     }
 }

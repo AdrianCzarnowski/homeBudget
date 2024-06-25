@@ -35,8 +35,11 @@ public class ReportService {
         return reportMapper.toDto(savedEntity);
     }
 
-    public void deleteReport(UUID uuid) {
-        reportRepository.deleteById(uuid);
+    public void deleteReport(UUID reportId) {
+        reportRepository.deleteById(reportId);
+        if (!reportRepository.existsById(reportId)) {
+            throw new RuntimeException("Transaction with ID " + reportId + " does not exist");
+        }
     }
 
 }

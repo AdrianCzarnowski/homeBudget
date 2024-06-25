@@ -37,5 +37,8 @@ public class UserService {
     //TODO - validation delete methods
     public void deleteUser(UUID userId) {
         userRepository.deleteById(userId);
+        if (!userRepository.existsById(userId)) {
+            throw new RuntimeException("User with ID " + userId + " does not exist");
+        }
     }
 }

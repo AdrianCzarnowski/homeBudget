@@ -33,8 +33,11 @@ public class BudgetService {
         return budgetMapper.toDto(savedEntity);
     }
 
-    public void deleteBudget(UUID uuid) {
-        budgetRepository.deleteById(uuid);
+    public void deleteBudget(UUID budgetId) {
+        budgetRepository.deleteById(budgetId);
+        if (!budgetRepository.existsById(budgetId)) {
+            throw new RuntimeException("Transaction with ID " + budgetId + " does not exist");
+        }
     }
 
     public BudgetDto findByCategoryId(UUID categoryId){

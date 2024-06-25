@@ -35,8 +35,12 @@ public class TransactionService {
         return transactionMapper.toDto(savedEntity);
     }
 
-    public void deleteTransaction(UUID uuid) {
-        transactionRepository.deleteById(uuid);
+    public void deleteTransaction(UUID transactionId) {
+        transactionRepository.deleteById(transactionId);
+        if (!transactionRepository.existsById(transactionId)) {
+            throw new RuntimeException("Transaction with ID " + transactionId + " does not exist");
+        }
+
     }
 }
 
