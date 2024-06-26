@@ -1,12 +1,10 @@
 package projects.adrian.homebudget.service;
 
-import org.apache.catalina.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import projects.adrian.homebudget.data.UserTestData;
+import projects.adrian.homebudget.data.TestData;
 import projects.adrian.homebudget.mapper.UserMapper;
 import projects.adrian.homebudget.mapper.UserMapperImpl;
 import projects.adrian.homebudget.model.dto.UserDto;
@@ -15,7 +13,6 @@ import projects.adrian.homebudget.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 
@@ -37,7 +34,7 @@ class UserServiceTest {
         //given
 
         UserEntity userEntity = Mockito.mock(UserEntity.class);
-        UserDto userDto =  new UserDto(UserTestData.USER_ID, null, null, null, null, null, null, null, null, null);
+        UserDto userDto =  new UserDto(TestData.USER_ID, null, null, null, null, null, null, null, null, null);
 
         Mockito.when(userRepository.findAll())
                 .thenReturn(List.of(userEntity));
@@ -54,12 +51,12 @@ class UserServiceTest {
     @Test
     void findById_UserFoundById_passed() {
         //given
-        Mockito.when(userRepository.findById(UserTestData.USER_ID))
+        Mockito.when(userRepository.findById(TestData.USER_ID))
                 .thenReturn(Optional.of(new UserEntity()));
         Mockito.when(userMapper.toDto(any()))
                 .thenReturn(new UserDto(null, null, null, null, null, null, null, null, null, null));
         //when
-        UserDto result = userService.findById(UserTestData.USER_ID);
+        UserDto result = userService.findById(TestData.USER_ID);
         //then
         Assertions.assertNotNull(result);
     }
@@ -68,7 +65,7 @@ class UserServiceTest {
     void saveUser_UserSaved_passed() {
         //given
         UserEntity entity = new UserEntity();
-        UserDto userDto = new UserDto(UserTestData.USER_ID, null, null, null, null, null, null, null, null, null);
+        UserDto userDto = new UserDto(TestData.USER_ID, null, null, null, null, null, null, null, null, null);
         Mockito.when(userMapper.toEntity(any()))
                 .thenReturn(entity);
         Mockito.when(userRepository.save(any()))
@@ -79,14 +76,14 @@ class UserServiceTest {
         UserDto result = userService.saveUser(userDto);
         //then
         Assertions.assertNotNull(result);
-        Assertions.assertEquals(result.userId(), UserTestData.USER_ID);
+        Assertions.assertEquals(result.userId(), TestData.USER_ID);
     }
 
     @Test
     void deleteUser_UserDeleted_passed() {
         //when
-        userService.deleteUser(UserTestData.USER_ID);
+        userService.deleteUser(TestData.USER_ID);
         //then
-        Mockito.verify(userRepository).deleteById(UserTestData.USER_ID);
+        Mockito.verify(userRepository).deleteById(TestData.USER_ID);
     }
 }

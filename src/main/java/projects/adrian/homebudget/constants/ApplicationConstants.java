@@ -12,4 +12,6 @@ public class ApplicationConstants {
     public final static String REPORT_API_URL = "/api/report";
     public final static String TRANSACTION_API_URL = "/api/transaction";
     public final static String USER_API_URL = "/api/user";
+
+
 }

@@ -23,7 +23,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @GetMapping(value = "/get-by-id/{uuid}")
+    @GetMapping(value = "/{uuid}")
     public ResponseEntity<UserDto> getById(@PathVariable UUID uuid) {
         return ResponseEntity.ok(userService.findById(uuid));
     }

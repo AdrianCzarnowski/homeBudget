@@ -36,9 +36,9 @@ public class CategoryService {
     }
 
     public void deleteCategory(UUID categoryId) {
-        categoryRepository.deleteById(categoryId);
         if (!categoryRepository.existsById(categoryId)) {
             throw new RuntimeException("Transaction with ID " + categoryId + " does not exist");
         }
+        categoryRepository.deleteById(categoryId);
     }
 }

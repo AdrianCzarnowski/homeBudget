@@ -34,10 +34,10 @@ public class BudgetService {
     }
 
     public void deleteBudget(UUID budgetId) {
-        budgetRepository.deleteById(budgetId);
         if (!budgetRepository.existsById(budgetId)) {
             throw new RuntimeException("Transaction with ID " + budgetId + " does not exist");
         }
+        budgetRepository.deleteById(budgetId);
     }
 
     public BudgetDto findByCategoryId(UUID categoryId){

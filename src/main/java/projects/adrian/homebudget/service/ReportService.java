@@ -36,10 +36,10 @@ public class ReportService {
     }
 
     public void deleteReport(UUID reportId) {
-        reportRepository.deleteById(reportId);
         if (!reportRepository.existsById(reportId)) {
             throw new RuntimeException("Transaction with ID " + reportId + " does not exist");
         }
+        reportRepository.deleteById(reportId);
     }
 
 }
