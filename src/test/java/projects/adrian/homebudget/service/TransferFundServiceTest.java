@@ -32,17 +32,17 @@ public class TransferFundServiceTest {
         CategoryDto categoryDto1 = new CategoryDto(categoryFounder, UUID.randomUUID(), "category1", "type1", "description1");
         CategoryDto categoryDto2 = new CategoryDto(categoryReceiver, UUID.randomUUID(), "category2", "type2", "description2");
 
-        BudgetDto founderBudgetDto = new BudgetDto(UUID.randomUUID(), UUID.randomUUID(), categoryDto1, 500.0f, 1, 2024, null, null, null);
-        BudgetDto receiverBudgetDto = new BudgetDto(UUID.randomUUID(), UUID.randomUUID(), categoryDto2, 300.0f, 1, 2024, null, null, null);
+        BudgetDto founderBudgetDto = new BudgetDto(UUID.randomUUID(), UUID.randomUUID(), categoryDto1.categoryId(), 500.0f, 1, 2024, null, null, null);
+        BudgetDto receiverBudgetDto = new BudgetDto(UUID.randomUUID(), UUID.randomUUID(), categoryDto2.categoryId(), 300.0f, 1, 2024, null, null, null);
 
         Mockito.when(budgetService.findByCategoryId(categoryFounder)).thenReturn(founderBudgetDto);
         Mockito.when(budgetService.findByCategoryId(categoryReceiver)).thenReturn(receiverBudgetDto);
 
         Mockito.doAnswer(invocation -> {
             BudgetDto dto = invocation.getArgument(0);
-            if (dto.category().categoryId().equals(categoryFounder)) {
+            if (dto.categoryId().equals(categoryFounder)) {
                 assertEquals(400.0f, dto.amount());
-            } else if (dto.category().categoryId().equals(categoryReceiver)) {
+            } else if (dto.categoryId().equals(categoryReceiver)) {
                 assertEquals(400.0f, dto.amount());
             }
             return null;
@@ -80,7 +80,7 @@ public class TransferFundServiceTest {
 
         CategoryDto categoryDto1 = new CategoryDto(categoryFounder, UUID.randomUUID(), "category1", "type1", "description1");
 
-        BudgetDto founderBudgetDto = new BudgetDto(UUID.randomUUID(), UUID.randomUUID(), categoryDto1, 500.0f, 1, 2024, null, null, null);
+        BudgetDto founderBudgetDto = new BudgetDto(UUID.randomUUID(), UUID.randomUUID(), categoryDto1.categoryId(), 500.0f, 1, 2024, null, null, null);
         //when
         Mockito.when(budgetService.findByCategoryId(categoryFounder)).thenReturn(founderBudgetDto);
         Mockito.when(budgetService.findByCategoryId(categoryReceiver)).thenThrow(new RuntimeException("Can not find budget by given category id " + categoryReceiver));

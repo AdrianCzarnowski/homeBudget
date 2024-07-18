@@ -10,7 +10,7 @@ import java.util.UUID;
 @Entity
 @Table(schema = ApplicationConstants.SCHEMA_DB, name = "budgets")
 @Data
-@EntityListeners(BudgetEntityListener.class)
+//@EntityListeners(BudgetEntityListener.class)
 public class BudgetEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
