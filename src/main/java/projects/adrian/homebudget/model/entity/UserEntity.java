@@ -1,9 +1,10 @@
 package projects.adrian.homebudget.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import projects.adrian.homebudget.constants.ApplicationConstants;
 import jakarta.persistence.*;
 import lombok.Data;
+import projects.adrian.homebudget.constants.ApplicationConstants;
+import projects.adrian.homebudget.model.listener.UserEntityListener;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Entity
 @Table(schema = ApplicationConstants.SCHEMA_DB, name = "users")
 @Data
+@EntityListeners(UserEntityListener.class)
 public class UserEntity {
 
     @Id
@@ -21,6 +23,7 @@ public class UserEntity {
     private UUID userId;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     List<CategoryEntity> categories = new ArrayList<>();
 
 
@@ -47,5 +50,8 @@ public class UserEntity {
 
     @Column(name = "last_login", nullable = false)
     private Timestamp lastLogin;
+
+    @Transient
+    private String token;
 
 }

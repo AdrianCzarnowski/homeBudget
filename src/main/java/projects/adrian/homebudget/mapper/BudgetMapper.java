@@ -18,6 +18,7 @@ public interface BudgetMapper {
     List<BudgetEntity> toListEntity(List<BudgetDto> budgetDtos);
 
     @Mapping(source = "user.userId", target = "userId")
+    @Mapping(source = "category.categoryId", target = "categoryId")
     @Named("toDto")
     BudgetDto toDto(BudgetEntity budgetEntity);
 

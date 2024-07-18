@@ -20,8 +20,9 @@ public class CategoryEntity {
     @Column(name ="category_id", nullable = false)
     private UUID categoryId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private UserEntity user;
 
     @Column(name = "name", nullable = false)

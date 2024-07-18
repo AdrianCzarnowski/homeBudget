@@ -25,7 +25,7 @@ public class UserService {
     public UserDto findById(UUID uuid) {
         Optional<UserEntity> optionalUserEntity = userRepository.findById(uuid);
         return optionalUserEntity.map(userMapper::toDto)
-                .orElseThrow(() -> new RuntimeException("Can not find user by given id " + uuid));
+                .orElseThrow(() -> new RuntimeException("Can not find userId by given id " + uuid));
     }
 
     public UserDto saveUser(UserDto userDto) {

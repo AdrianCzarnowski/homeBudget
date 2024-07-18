@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import projects.adrian.homebudget.model.dto.BudgetDto;
-import projects.adrian.homebudget.model.dto.CategoryDto;
 
 
 import java.util.UUID;
@@ -35,7 +34,7 @@ public class TransferFundService {
     }
 
     private BudgetDto setBudgetAmount(BudgetDto budgetDto, float amount) {
-        return new BudgetDto(budgetDto.budgetID(), budgetDto.userId(), budgetDto.category(),
+        return new BudgetDto(budgetDto.budgetId(), budgetDto.userId(), budgetDto.categoryId(),
                 amount, budgetDto.monthDt(), budgetDto.yearDt(), budgetDto.startTime(), budgetDto.endTime(), budgetDto.generatedDate());
     }
 

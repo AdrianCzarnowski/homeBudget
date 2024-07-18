@@ -2,6 +2,7 @@ package projects.adrian.homebudget.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import projects.adrian.homebudget.cache.BudgetCacheManager;
 import projects.adrian.homebudget.mapper.BudgetMapper;
 import projects.adrian.homebudget.model.dto.BudgetDto;
 import projects.adrian.homebudget.model.entity.BudgetEntity;
@@ -16,13 +17,14 @@ import java.util.UUID;
 public class BudgetService {
     private final BudgetRepository budgetRepository;
     private final BudgetMapper budgetMapper;
+    private final BudgetCacheManager budgetCacheManager;
 
     public List<BudgetDto> getAllBudgets() {
         return budgetRepository.findAll().stream().map(budgetMapper::toDto).toList();
     }
 
     public BudgetDto findByBudgetId(UUID uuid) {
-        Optional<BudgetEntity> optionalBudgetEntity = budgetRepository.findById(uuid);
+        Optional<BudgetEntity> optionalBudgetEntity = budgetCacheManager.findById(uuid);
         return optionalBudgetEntity.map(budgetMapper::toDto)
                 .orElseThrow(() -> new RuntimeException("Can not find budget by given id " + uuid));
     }
@@ -30,6 +32,7 @@ public class BudgetService {
     public BudgetDto saveBudget(BudgetDto budgetDto) {
         BudgetEntity budgetEntity = budgetMapper.toEntity(budgetDto);
         BudgetEntity savedEntity = budgetRepository.save(budgetEntity);
+        budgetCacheManager.clearBudgetCache(budgetDto.budgetId());
         return budgetMapper.toDto(savedEntity);
     }
 
@@ -40,7 +43,7 @@ public class BudgetService {
         budgetRepository.deleteById(budgetId);
     }
 
-    public BudgetDto findByCategoryId(UUID categoryId){
+    public BudgetDto findByCategoryId(UUID categoryId) {
         Optional<BudgetEntity> optionalBudgetEntity = budgetRepository.findByCategoryCategoryId(categoryId);
         return optionalBudgetEntity.map(budgetMapper::toDto)
                 .orElseThrow(() -> new RuntimeException("Can not find budget by given category id " + categoryId));

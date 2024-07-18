@@ -3,6 +3,7 @@ package projects.adrian.homebudget.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import projects.adrian.homebudget.cache.BudgetCacheManager;
 import projects.adrian.homebudget.mapper.BudgetMapper;
 import projects.adrian.homebudget.model.dto.BudgetDto;
 import projects.adrian.homebudget.model.entity.BudgetEntity;
@@ -21,13 +22,14 @@ public class BudgetServiceTest {
     private BudgetService budgetService;
     private BudgetMapper budgetMapper;
     private BudgetRepository budgetRepository;
+    private BudgetCacheManager budgetCacheManager;
 
 
     @BeforeEach
     void setUp() {
         budgetRepository = Mockito.mock(BudgetRepository.class);
         budgetMapper = Mockito.mock(BudgetMapper.class);
-        budgetService = new BudgetService(budgetRepository, budgetMapper);
+        budgetService = new BudgetService(budgetRepository, budgetMapper,budgetCacheManager);
     }
 
     @Test

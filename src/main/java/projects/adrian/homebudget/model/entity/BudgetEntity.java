@@ -1,17 +1,16 @@
 package projects.adrian.homebudget.model.entity;
 
-import projects.adrian.homebudget.constants.ApplicationConstants;
 import jakarta.persistence.*;
 import lombok.Data;
+import projects.adrian.homebudget.constants.ApplicationConstants;
+import projects.adrian.homebudget.model.listener.BudgetEntityListener;
 
-import java.sql.Timestamp;
-import java.time.Month;
-import java.time.Year;
 import java.util.UUID;
 
 @Entity
 @Table(schema = ApplicationConstants.SCHEMA_DB, name = "budgets")
 @Data
+@EntityListeners(BudgetEntityListener.class)
 public class BudgetEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -34,6 +33,4 @@ public class BudgetEntity {
 
     @Column(name = "year_dt", nullable = false)
     private Integer yearDt;
-
-
 }
