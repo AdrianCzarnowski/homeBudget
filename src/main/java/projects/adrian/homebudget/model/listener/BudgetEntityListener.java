@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.extern.slf4j.Slf4j;
 import projects.adrian.homebudget.model.entity.BudgetEntity;
 import projects.adrian.homebudget.model.entity.CategoryEntity;
-import projects.adrian.homebudget.model.entity.budgetEntity;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Slf4j
