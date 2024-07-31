@@ -33,4 +33,8 @@ public class BudgetEntity {
 
     @Column(name = "year_dt", nullable = false)
     private Integer yearDt;
+
+    @Version
+    @Column(name = "version", nullable = false)
+    private Integer version;
 }

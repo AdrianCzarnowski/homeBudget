@@ -38,6 +38,7 @@ CREATE TABLE homebudget.budgets (
   amount FLOAT,
   month_dt INTEGER NOT NULL,
   year_dt INTEGER NOT NULL,
+  version INTEGER NOT NULL DEFAULT 0,
   CONSTRAINT f_user_id
     FOREIGN KEY(user_id)
         REFERENCES users(user_id),

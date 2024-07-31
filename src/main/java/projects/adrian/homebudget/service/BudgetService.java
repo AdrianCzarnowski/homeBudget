@@ -1,8 +1,10 @@
 package projects.adrian.homebudget.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import projects.adrian.homebudget.cache.BudgetCacheManager;
+import projects.adrian.homebudget.event.BudgetChangeEvent;
 import projects.adrian.homebudget.mapper.BudgetMapper;
 import projects.adrian.homebudget.model.dto.BudgetDto;
 import projects.adrian.homebudget.model.entity.BudgetEntity;
@@ -19,6 +21,8 @@ public class BudgetService {
     private final BudgetMapper budgetMapper;
     private final BudgetCacheManager budgetCacheManager;
 
+    private final ApplicationEventPublisher applicationEventPublisher;
+
     public List<BudgetDto> getAllBudgets() {
         return budgetRepository.findAll().stream().map(budgetMapper::toDto).toList();
     }
@@ -32,6 +36,7 @@ public class BudgetService {
     public BudgetDto saveBudget(BudgetDto budgetDto) {
         BudgetEntity budgetEntity = budgetMapper.toEntity(budgetDto);
         BudgetEntity savedEntity = budgetRepository.save(budgetEntity);
+        applicationEventPublisher.publishEvent(new BudgetChangeEvent(this, budgetDto));
         budgetCacheManager.clearBudgetCache(budgetDto.budgetId());
         return budgetMapper.toDto(savedEntity);
     }
