@@ -42,4 +42,8 @@ public class ReportService {
         reportRepository.deleteById(reportId);
     }
 
+    public  boolean checkItemExistById(UUID uuid){
+        return reportRepository.existsById(uuid);
+    }
+
 }

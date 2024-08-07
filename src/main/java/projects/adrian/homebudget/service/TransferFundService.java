@@ -35,7 +35,6 @@ public class TransferFundService {
 
     private BudgetDto setBudgetAmount(BudgetDto budgetDto, float amount) {
         return new BudgetDto(budgetDto.budgetId(), budgetDto.userId(), budgetDto.categoryId(),
-                amount, budgetDto.monthDt(), budgetDto.yearDt(), budgetDto.startTime(), budgetDto.endTime(), budgetDto.generatedDate());
+                amount, budgetDto.monthDt(), budgetDto.yearDt(), budgetDto.startTime(), budgetDto.endTime(), budgetDto.generatedDate(), budgetDto.version());
     }
-
 }
