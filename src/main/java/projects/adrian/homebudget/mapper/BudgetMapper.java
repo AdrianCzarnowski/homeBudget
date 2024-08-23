@@ -7,8 +7,13 @@ import projects.adrian.homebudget.model.entity.BudgetEntity;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
+import projects.adrian.homebudget.model.entity.CategoryEntity;
+import projects.adrian.homebudget.model.entity.UserEntity;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Mapper(componentModel = ApplicationConstants.COMPONENT_MODEL_SPRING)
 public interface BudgetMapper {
@@ -23,5 +28,27 @@ public interface BudgetMapper {
     BudgetDto toDto(BudgetEntity budgetEntity);
 
     @Named("toEntity")
+    @Mapping(source = "userId", target = "user", qualifiedByName = "userIdToUserEntity")
+    @Mapping(source = "categoryId", target = "category", qualifiedByName = "categoryIdToCategoryEntity")
     BudgetEntity toEntity(BudgetDto budgetDto);
+
+    @Named("userIdToUserEntity")
+    default UserEntity userIdToUserEntity(UUID uuid){
+        return
+                Optional.ofNullable(uuid).map(id -> {
+                    UserEntity userEntity = new UserEntity();
+                    userEntity.setUserId(id);
+                    return userEntity;
+                }).orElse(null);
+    }
+
+    @Named("categoryIdToCategoryEntity")
+    default CategoryEntity categoryIdToCategoryEntity(UUID uuid){
+        return
+                Optional.ofNullable(uuid).map(id -> {
+                    CategoryEntity categoryEntity = new CategoryEntity();
+                    categoryEntity.setCategoryId(id);
+                    return categoryEntity;
+                }).orElse(null);
+    }
 }

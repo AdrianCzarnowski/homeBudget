@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import projects.adrian.homebudget.aop.annotation.ItemWithIdMustExist;
 import projects.adrian.homebudget.constants.ApplicationConstants;
 import projects.adrian.homebudget.model.dto.BudgetDto;
 import projects.adrian.homebudget.service.BudgetService;
+import projects.adrian.homebudget.service.ReportService;
 
 import java.util.List;
 import java.util.UUID;
@@ -34,11 +36,13 @@ public class BudgetController {
     }
 
     @PutMapping(value = "/{uuid}")
+    @ItemWithIdMustExist(serviceClass = BudgetService.class, checkExistByIdMethodName = "checkItemExistById")
     public ResponseEntity<BudgetDto> updateBudget(@PathVariable UUID uuid, @RequestBody BudgetDto budgetDto) {
         return new ResponseEntity<>(budgetService.saveBudget(budgetDto), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{uuid}")
+    @ItemWithIdMustExist(serviceClass = BudgetService.class, checkExistByIdMethodName = "checkItemExistById")
     public ResponseEntity<BudgetDto> deleteBudget(@PathVariable UUID uuid) {
         budgetService.deleteBudget(uuid);
         return ResponseEntity.noContent().build();

@@ -53,4 +53,12 @@ public class BudgetService {
         return optionalBudgetEntity.map(budgetMapper::toDto)
                 .orElseThrow(() -> new RuntimeException("Can not find budget by given category id " + categoryId));
     }
+
+    public  boolean checkItemExistById(UUID uuid){
+        return budgetRepository.existsById(uuid);
+    }
+
+    //TODO - exception obsługujący błedy przyjmujący HHTP status i wiadomość oraz Exeption Handler któy będzie łapał to i drukował klientowi to co chce
+    //TODO - poprawić wszystkie mappery
+    //TODO - napisać własny aspect czy bisuness object version który przyszedł jest większy od 0. ( Trzeba dobrać się do Body z requesta i pobrać business version. W adnotacji  nie dodaje, żadnych pól)
 }
