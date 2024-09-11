@@ -6,6 +6,7 @@ import projects.adrian.homebudget.constants.ApplicationConstants;
 import projects.adrian.homebudget.model.dto.UserDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import projects.adrian.homebudget.rest.UserServiceFacade;
 import projects.adrian.homebudget.service.UserService;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.UUID;
 public class UserController {
 
     private final UserService userService;
+    private final UserServiceFacade userServiceFacade;
 
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {
@@ -43,6 +45,12 @@ public class UserController {
         userService.deleteUser(uuid);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping(value = "/userFacade")
+    public ResponseEntity<String> getUserFromMicroservice(){
+        return ResponseEntity.ok(userServiceFacade.getUser());
+    }
+
 }
 
 

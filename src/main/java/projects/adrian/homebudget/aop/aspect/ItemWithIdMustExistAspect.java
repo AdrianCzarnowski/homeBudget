@@ -21,10 +21,11 @@ public class ItemWithIdMustExistAspect {
     private final ApplicationContext applicationContext;
 
     @Pointcut("@annotation(projects.adrian.homebudget.aop.annotation.ItemWithIdMustExist)")
-    public void itemWithIdMustExistAnnotation(){
-        
+    public void itemWithIdMustExistAnnotation() {
+
     }
-    
+
+
     @Before("itemWithIdMustExistAnnotation()")
     @SneakyThrows
     public void validateIfObjectExist(JoinPoint joinPoint) {
@@ -40,31 +41,10 @@ public class ItemWithIdMustExistAspect {
 
         boolean isExist = (boolean) checkIfExistByIdMethod.invoke(serviceBean, uuid);
 
-        if (!isExist){
+        if (!isExist) {
             throw new RuntimeException("Item id does not exist");
         }
 
     }
-
-//    @After("itemWithIdMustExistAnnotation()")
-//    public void afterAdvice() {
-//
-//    }
-//
-//    @AfterReturning("itemWithIdMustExistAnnotation()")
-//    public void afterReturning() {
-//
-//    }
-//
-//    @AfterThrowing("itemWithIdMustExistAnnotation()")
-//    public void afterThrowing() {
-//
-//    }
-//
-//    @SneakyThrows
-//    @Around("itemWithIdMustExistAnnotation()")
-//    public void around(ProceedingJoinPoint proceedingJoinPoint) {
-//        proceedingJoinPoint.proceed();
-//    }
 
 }

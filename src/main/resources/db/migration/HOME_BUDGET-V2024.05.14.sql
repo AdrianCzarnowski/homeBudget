@@ -1,4 +1,4 @@
-CREATE TABLE homebudget.users (
+CREATE TABLE postgres.users (
   user_id UUID PRIMARY KEY,
   username VARCHAR (50) UNIQUE NOT NULL,
   password VARCHAR (50) NOT NULL,
@@ -6,7 +6,7 @@ CREATE TABLE homebudget.users (
   created_at TIMESTAMP NOT NULL,
   last_login TIMESTAMP
 );
-CREATE TABLE homebudget.categories (
+CREATE TABLE postgres.categories (
   category_id UUID PRIMARY KEY,
   user_id UUID,
   name VARCHAR (50) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE homebudget.categories (
     FOREIGN KEY(user_id)
         REFERENCES users(user_id)
 );
-CREATE TABLE homebudget.transactions (
+CREATE TABLE postgres.transactions (
   transaction_id UUID PRIMARY KEY,
   user_id UUID,
   category_id UUID,
@@ -31,7 +31,7 @@ CREATE TABLE homebudget.transactions (
     FOREIGN KEY(category_id)
         REFERENCES categories(category_id)
 );
-CREATE TABLE homebudget.budgets (
+CREATE TABLE postgres.budgets (
   budget_id UUID PRIMARY KEY,
   user_id UUID,
   category_id UUID,
@@ -46,7 +46,7 @@ CREATE TABLE homebudget.budgets (
     FOREIGN KEY(category_id)
         REFERENCES categories(category_id)
 );
-CREATE TABLE homebudget.reports (
+CREATE TABLE postgres.reports (
   report_id UUID PRIMARY KEY,
   user_id UUID,
   report_type VARCHAR(50) NOT NULL,
