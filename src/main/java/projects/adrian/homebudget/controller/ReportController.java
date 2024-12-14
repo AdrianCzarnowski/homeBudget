@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import projects.adrian.homebudget.aop.annotation.ItemWithIdMustExist;
 import projects.adrian.homebudget.constants.ApplicationConstants;
 import projects.adrian.homebudget.model.dto.ReportDto;
 import projects.adrian.homebudget.service.ReportService;
@@ -34,6 +35,7 @@ public class ReportController {
         return new ResponseEntity<>(reportService.saveReport(reportDto), HttpStatus.CREATED);
     }
 
+    @ItemWithIdMustExist(serviceClass = ReportService.class, checkExistByIdMethodName = "checkItemExistById")
     @PutMapping(value = "/{uuid}")
     public ResponseEntity<ReportDto> updateReport(@PathVariable UUID uuid, @RequestBody ReportDto reportDto) {
         return new ResponseEntity<>(reportService.saveReport(reportDto), HttpStatus.OK);

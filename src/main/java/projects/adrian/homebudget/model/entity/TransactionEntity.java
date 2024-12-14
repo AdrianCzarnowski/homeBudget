@@ -1,8 +1,9 @@
 package projects.adrian.homebudget.model.entity;
 
-import projects.adrian.homebudget.constants.ApplicationConstants;
 import jakarta.persistence.*;
 import lombok.Data;
+import projects.adrian.homebudget.constants.ApplicationConstants;
+import projects.adrian.homebudget.model.listener.TransactionalEntityListener;
 
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -10,10 +11,11 @@ import java.util.UUID;
 @Entity
 @Table(schema = ApplicationConstants.SCHEMA_DB, name = "transactions")
 @Data
+@EntityListeners(TransactionalEntityListener.class)
 public class TransactionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name ="transaction_id", nullable = false)
+    @Column(name = "transaction_id", nullable = false)
     private UUID transactionId;
 
     @ManyToOne

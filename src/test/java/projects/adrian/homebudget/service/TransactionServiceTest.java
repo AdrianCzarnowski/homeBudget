@@ -65,6 +65,8 @@ public class TransactionServiceTest {
 
     @Test
     void getTransactionById_TransactionNotFoundById_throwException() {
+
+        //TODO - zmienic random UUID, nie mogą być w testach, pracujemy na danych, które są dostępne
         //given
         UUID transactionId = UUID.randomUUID();
 
